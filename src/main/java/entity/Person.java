@@ -3,10 +3,12 @@ package entity;
 import base.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SoftDelete;
 
 @Getter
@@ -16,7 +18,7 @@ import org.hibernate.annotations.SoftDelete;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 @SoftDelete
-@Builder
+@SuperBuilder
 @MappedSuperclass
 public class Person extends BaseEntity<Integer> {
     @Pattern(regexp = "[a-zA-Z]+")
@@ -32,7 +34,7 @@ public class Person extends BaseEntity<Integer> {
             , message = "password has to be 8 size and must contain at least 1 lower and upper case and 1 digit and 1 char ")
     @NotNull(message = "password can not be null")
     String password;
-    @Pattern(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")
+    @Email
     @NotNull(message = "email can not be null")
     String email;
     @NotNull(message = "phoneNumber can not be null")
