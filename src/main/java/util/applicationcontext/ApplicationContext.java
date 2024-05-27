@@ -45,19 +45,19 @@ public class ApplicationContext {
         SUB_DUTY_SERVICE = new SubDutyServiceImpl(SUB_DUTY_REPOSITORY,SESSION_FACTORY);
     }
 
-    public static CustomerService getStudentService() {
+    public static CustomerService getCustomerService() {
         return CUSTOMER_SERVICE;
     }
 
-    public static DutyService getEducationLoanService() {
+    public static DutyService getDutyService() {
         return DUTY_SERVICE;
     }
 
-    public static ExpertService getMortgageService() {
+    public static ExpertService getExpertService() {
         return EXPERT_SERVICE;
     }
-    public static OfferService getPaidInstallmentsService(){return OFFER_SERVICE;}
-    public static OrderService getTuitionLoanService(){return ORDER_SERVICE;}
-    public static SubDutyService getUnpaidInstallmentsService(){return SUB_DUTY_SERVICE;}
+    public static OfferService getOfferService(){return OFFER_SERVICE;}
+    public static OrderService getOrderService(){return ORDER_SERVICE;}
+    public static SubDutyService getSubDutyService(){return SUB_DUTY_SERVICE;}
 
 }
