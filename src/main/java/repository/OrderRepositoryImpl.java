@@ -33,4 +33,14 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl<Order,Integer>
         session.close();
         return orders;
     }
+
+    @Override
+    public List<Order> allOrders() throws NotFoundException {
+        Session session = SessionFactorySingleton.getInstance().openSession();
+        Query<Order> query = session.createQuery(" FROM Order o ",
+                Order.class);
+        List<Order> orders = query.list();
+        session.close();
+        return orders;
+    }
 }
