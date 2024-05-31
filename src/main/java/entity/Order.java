@@ -47,6 +47,12 @@ public class Order extends BaseEntity<Integer> {
     @Enumerated(EnumType.STRING)
     @NotNull
     BestTime bestTime;
+    @Column(name = "take_offer_limit")
+    @Future
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    Date takeOfferLimit;
+    @ToString.Exclude
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     List<Offer> offers;
 
