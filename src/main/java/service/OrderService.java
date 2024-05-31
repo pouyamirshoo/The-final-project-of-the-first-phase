@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface OrderService extends BaseService<Order,Integer> {
     List<Order> findByCustomerAndCondition(int id, OrderCondition orderCondition) throws ReturnMethodException;
+    List<Order> allOrders() throws ReturnMethodException;
 }
