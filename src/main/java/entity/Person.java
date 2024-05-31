@@ -3,13 +3,18 @@ package entity;
 import base.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SoftDelete;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -30,6 +35,7 @@ public class Person extends BaseEntity<Integer> {
     @Column(unique = true)
     @NotNull(message = "username can not be null")
     String username;
+    @ToString.Exclude
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#!%&*])[A-Za-z0-9@#!%&*]{8}$"
             , message = "password has to be 8 size and must contain at least 1 lower and upper case and 1 digit and 1 char ")
     @NotNull(message = "password can not be null")
@@ -51,4 +57,7 @@ public class Person extends BaseEntity<Integer> {
     @Pattern(regexp = "^(?!(\\d)\1{3})[13-9]{4}[1346-9][013-9]{5}$")
     @NotNull(message = "postal code can not be null")
     String postalCode;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    Date registerTime;
 }
