@@ -3,7 +3,9 @@ package entity;
 import entity.enums.ExpertCondition;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -28,7 +30,8 @@ public class Expert extends Person{
     String nationalCode;
     @Column(name = "expert_image")
     @Lob
-    @NotNull(message = "must upload an image")
+    @Size(max = 300)
+    @NotEmpty(message = "must upload an image")
     byte[] expertImage;
     @Column(name = "expert_condition")
     @Enumerated(EnumType.STRING)
@@ -52,7 +55,7 @@ public class Expert extends Person{
             balance = 0;
         }
         if (rate == null) {
-            rate = 1;
+            rate = 0;
         }
     }
 
