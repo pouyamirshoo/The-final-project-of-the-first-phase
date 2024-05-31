@@ -1,7 +1,8 @@
 package entity.enums;
 
 public enum OrderCondition {
-    WAITING,
+    WAIT_FOR_ACCEPT,
     ACCEPTED,
-    RECEIVING_OFFERS
+    RECEIVING_OFFERS,
+    DONE
 }
