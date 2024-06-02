@@ -18,11 +18,11 @@ public class SubDutyRepositoryImpl extends BaseRepositoryImpl<SubDuty,Integer>
 
     @Override
     public Class<SubDuty> getEntityClass() {
-        return null;
+        return SubDuty.class;
     }
 
     @Override
-    public List<SubDuty> subDuties(int id) {
+    public List<SubDuty> subDuties(int id) throws NullPointerException {
         Session session = SessionFactorySingleton.getInstance().openSession();
         Query<SubDuty> query = session.createQuery(" FROM SubDuty s WHERE s.duty.id =:id",
                 SubDuty.class);
