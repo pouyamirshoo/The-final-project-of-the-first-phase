@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import java.util.Optional;
+
 public class CustomerRepositoryImpl extends BaseRepositoryImpl<Customer,Integer>
         implements CustomerRepository {
     public CustomerRepositoryImpl(SessionFactory sessionFactory) {
@@ -16,19 +18,22 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Customer,Integer>
 
     @Override
     public Class<Customer> getEntityClass() {
-        return null;
+        return Customer.class;
     }
 
 
     @Override
-    public Customer findByUsernameAndPassword(String username, String password) throws NotFoundException {
+    public Optional<Customer> findByUsernameAndPassword(String username, String password) throws NotFoundException {
         Session session = SessionFactorySingleton.getInstance().openSession();
         Query<Customer> query = session.createQuery("FROM Customer c WHERE c.username = :username " +
                 "AND c.password = :password", Customer.class);
         query.setParameter("username", username);
         query.setParameter("password", password);
-        Customer customer = query.uniqueResult();
+        Optional<Customer> optionalCustomer = query .setMaxResults(1)
+                .getResultList()
+                .stream()
+                .findFirst();
         session.close();
-        return customer;
+        return optionalCustomer;
     }
 }
