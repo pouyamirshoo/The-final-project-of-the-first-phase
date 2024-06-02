@@ -4,10 +4,14 @@ import base.entity.BaseEntity;
 import entity.enums.OfferCondition;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SoftDelete;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -34,6 +38,9 @@ public class Offer extends BaseEntity<Integer> {
     @Column(name = "take_long")
     @NotNull(message = "takeLong can not be null")
     Integer takeLong;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    Date creatOfferDate;
 
     @PrePersist
     public void defaultValues(){
