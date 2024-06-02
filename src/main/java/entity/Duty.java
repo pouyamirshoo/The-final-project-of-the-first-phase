@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@ToString
+@ToString(callSuper = true)
 @SoftDelete
 @SuperBuilder
 @Entity
@@ -25,6 +25,7 @@ public class Duty extends BaseEntity<Integer> {
     @Pattern(regexp = "[a-zA-Z]+")
     @NotNull(message = "duty name can not be null")
     String dutyName;
+    @ToString.Exclude
     @OneToMany(mappedBy = "duty",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     List<SubDuty> subDuties;
 }
