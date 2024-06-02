@@ -12,6 +12,6 @@ public class ExpertRepositoryImpl extends BaseRepositoryImpl<Expert,Integer>
 
     @Override
     public Class<Expert> getEntityClass() {
-        return null;
+        return Expert.class;
     }
 }
