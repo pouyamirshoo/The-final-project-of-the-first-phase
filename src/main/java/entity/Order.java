@@ -3,6 +3,8 @@ package entity;
 import base.entity.BaseEntity;
 import entity.enums.BestTime;
 import entity.enums.OrderCondition;
+import entity.enums.PaymentMethod;
+import entity.enums.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +40,11 @@ public class Order extends BaseEntity<Integer> {
     @NotNull
     @Temporal(TemporalType.DATE)
     Date dateCreatOrder;
+    @NotNull(message = "you must enter price")
+    int offerPrice;
+    @Column(columnDefinition = "TEXT")
+    @NotNull(message = "enter description")
+    String description;
     @Column(name = "need_expert")
     @Future
     @NotNull
@@ -52,13 +59,26 @@ public class Order extends BaseEntity<Integer> {
     @NotNull
     @Temporal(TemporalType.DATE)
     Date takeOfferLimit;
+    @Column(name = "payment_method")
+    @Enumerated(EnumType.STRING)
+    PaymentMethod paymentMethod;
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
+    PaymentStatus paymentStatus;
     @ToString.Exclude
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     List<Offer> offers;
 
     @PrePersist
     public void defaultValues(){
-        if (orderCondition == null)
+        if (orderCondition == null) {
             orderCondition = OrderCondition.RECEIVING_OFFERS;
+        }
+        if (paymentMethod == null){
+            paymentMethod = PaymentMethod.CASH;
+        }
+        if (paymentStatus == null){
+            paymentStatus = PaymentStatus.UNPAID;
+        }
     }
 }
