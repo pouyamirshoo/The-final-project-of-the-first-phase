@@ -17,11 +17,11 @@ public class DutyRepositoryImpl extends BaseRepositoryImpl<Duty,Integer>
 
     @Override
     public Class<Duty> getEntityClass() {
-        return null;
+        return Duty.class;
     }
 
     @Override
-    public List<Duty> duties(){
+    public List<Duty> duties() throws NullPointerException{
         Session session = SessionFactorySingleton.getInstance().openSession();
         Query<Duty> query = session.createQuery(" FROM Duty d ",
                 Duty.class);
