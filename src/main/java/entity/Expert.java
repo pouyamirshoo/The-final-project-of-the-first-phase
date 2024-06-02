@@ -2,10 +2,7 @@ package entity;
 
 import entity.enums.ExpertCondition;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -40,6 +37,7 @@ public class Expert extends Person{
     String rejectReason;
     @Max(5)
     Integer rate;
+    @Min(0)
     Integer balance;
     @ManyToMany(cascade = CascadeType.MERGE)
     List<SubDuty> subDuties;
