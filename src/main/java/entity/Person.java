@@ -40,6 +40,7 @@ public class Person extends BaseEntity<Integer> {
             , message = "password has to be 8 size and must contain at least 1 lower and upper case and 1 digit and 1 char ")
     @NotNull(message = "password can not be null")
     String password;
+    @Column(unique = true)
     @Email
     @NotNull(message = "email can not be null")
     String email;
