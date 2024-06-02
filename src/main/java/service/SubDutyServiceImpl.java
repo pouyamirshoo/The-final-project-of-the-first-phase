@@ -1,5 +1,6 @@
 package service;
 
+import base.exception.ReturnMethodException;
 import base.service.BaseServiceImpl;
 import entity.SubDuty;
 import org.hibernate.SessionFactory;
@@ -15,6 +16,12 @@ public class SubDutyServiceImpl extends BaseServiceImpl<SubDuty,Integer, SubDuty
 
     @Override
     public List<SubDuty> subDuties(int id) {
-        return repository.subDuties(id);
+        List<SubDuty> subDuties;
+        try {
+            subDuties = repository.subDuties(id);
+        }catch (NullPointerException e){
+            throw new ReturnMethodException("");
+        }
+        return subDuties;
     }
 }
