@@ -19,7 +19,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl<Order,Integer>
 
     @Override
     public Class<Order> getEntityClass() {
-        return null;
+        return Order.class;
     }
 
     @Override
