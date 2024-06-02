@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@ToString
+@ToString(callSuper = true)
 @SoftDelete
 @SuperBuilder
 @Entity
@@ -30,8 +30,10 @@ public class SubDuty extends BaseEntity<Integer> {
     @Column(columnDefinition = "TEXT")
     @NotNull(message = "description most not null")
     String description;
+    @ToString.Exclude
     @ManyToOne
     Duty duty;
+    @ToString.Exclude
     @OneToMany(mappedBy = "subDuty",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     List<Order> orders;
 }
