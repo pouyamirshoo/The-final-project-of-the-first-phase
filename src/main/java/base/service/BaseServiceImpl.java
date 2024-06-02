@@ -2,7 +2,6 @@ package base.service;
 
 import base.entity.BaseEntity;
 import base.exception.NotFoundException;
-import base.exception.ReturnMethodException;
 import base.repository.BaseRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -48,7 +47,7 @@ public class BaseServiceImpl<T extends BaseEntity<ID>, ID extends Serializable
             session.getTransaction().commit();
             return foundEntity;
         } catch (NotFoundException e) {
-            throw new ReturnMethodException("");
+            throw new NullPointerException();
         }
     }
 
