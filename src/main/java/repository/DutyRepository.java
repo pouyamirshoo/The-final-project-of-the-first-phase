@@ -6,5 +6,5 @@ import entity.Duty;
 import java.util.List;
 
 public interface DutyRepository extends BaseRepository<Duty,Integer> {
-     List<Duty> duties();
+     List<Duty> duties() throws NullPointerException;
 }
