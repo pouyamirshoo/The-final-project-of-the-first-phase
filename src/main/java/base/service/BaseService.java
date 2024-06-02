@@ -8,7 +8,7 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
     void saveOrUpdate(T entity) throws IllegalStateException;
 
 
-    T findById(ID id);
+    T findById(ID id)throws NullPointerException;
 
     void delete(T t) throws IllegalStateException;
 
