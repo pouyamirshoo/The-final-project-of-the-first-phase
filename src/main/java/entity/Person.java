@@ -21,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@ToString
+@ToString(callSuper = true)
 @SoftDelete
 @SuperBuilder
 @MappedSuperclass
