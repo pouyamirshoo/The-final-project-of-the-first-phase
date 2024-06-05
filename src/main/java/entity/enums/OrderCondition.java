@@ -5,5 +5,6 @@ public enum OrderCondition {
     WAIT_FOR_ACCEPT,
     ACCEPTED,
     ONGOING,
+    DELAYED,
     DONE
 }
