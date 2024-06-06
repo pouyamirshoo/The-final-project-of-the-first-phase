@@ -1,6 +1,7 @@
 package entity;
 
 import entity.enums.ExpertCondition;
+import entity.enums.UpdatedField;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@ToString
+@ToString(callSuper = true)
 @SoftDelete
 @SuperBuilder
 @Entity
@@ -25,9 +26,10 @@ public class Expert extends Person{
     @NotNull(message = "Expert national code can not be null")
     @ValidationCode
     String nationalCode;
+    @ToString.Exclude
     @Column(name = "expert_image")
     @Lob
-    @Size(max = 300)
+    @Size(max = 300000,message = "it is too big file")
     @NotEmpty(message = "must upload an image")
     byte[] expertImage;
     @Column(name = "expert_condition")
@@ -39,8 +41,12 @@ public class Expert extends Person{
     Integer rate;
     @Min(0)
     Integer balance;
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @Enumerated(EnumType.STRING)
+    UpdatedField updatedField;
+    @ToString.Exclude
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     List<SubDuty> subDuties;
+    @ToString.Exclude
     @OneToMany(mappedBy = "expert",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     List<Offer> offers;
 
