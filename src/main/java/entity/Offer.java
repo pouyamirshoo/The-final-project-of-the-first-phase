@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@ToString
+@ToString(callSuper = true)
 @SoftDelete
 @SuperBuilder
 @Entity
@@ -38,13 +38,19 @@ public class Offer extends BaseEntity<Integer> {
     @Column(name = "take_long")
     @NotNull(message = "takeLong can not be null")
     Integer takeLong;
+    @Column(name = "delay_days")
+    Integer delayDays;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     Date creatOfferDate;
 
     @PrePersist
-    public void defaultValues(){
-        if (offerCondition == null)
+    public void defaultValues() {
+        if (offerCondition == null) {
             offerCondition = OfferCondition.WAITING;
+        }
+        if (delayDays == null) {
+            delayDays = 0;
+        }
     }
 }
