@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SoftDelete;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -40,9 +41,14 @@ public class Offer extends BaseEntity<Integer> {
     Integer takeLong;
     @Column(name = "delay_days")
     Integer delayDays;
+    @Column(name = "creat_Offer_Date", updatable = false)
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     Date creatOfferDate;
+    @Column(name = "update_Offer_Date")
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    Date updateOfferDate;
 
     @PrePersist
     public void defaultValues() {
