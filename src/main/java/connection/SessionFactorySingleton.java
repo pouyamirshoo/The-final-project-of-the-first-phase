@@ -23,6 +23,7 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(Order.class)
                     .addAnnotatedClass(SubDuty.class)
                     .addAnnotatedClass(Comments.class)
+                    .addAnnotatedClass(Requested.class)
                     .buildMetadata()
                     .buildSessionFactory();
         }
