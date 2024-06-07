@@ -34,6 +34,6 @@ public class SubDuty extends BaseEntity<Integer> {
     @ManyToOne
     Duty duty;
     @ToString.Exclude
-    @OneToMany(mappedBy = "subDuty",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "subDuty",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     List<Order> orders;
 }
