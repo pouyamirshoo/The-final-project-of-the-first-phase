@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public class OfferRepositoryImpl extends BaseRepositoryImpl<Offer,Integer>
         implements OfferRepository {
@@ -22,9 +23,32 @@ public class OfferRepositoryImpl extends BaseRepositoryImpl<Offer,Integer>
     }
 
     @Override
-    public List<Offer> findByOrderId(int id) throws NotFoundException {
+    public Optional<Offer> findByOrderId(int id) throws NotFoundException {
         Session session = SessionFactorySingleton.getInstance().openSession();
         Query<Offer> query = session.createQuery("FROM Offer o WHERE o.order.id = :id ", Offer.class);
+        query.setParameter("id", id);
+        Optional<Offer> optionalOffer = query.setMaxResults(1)
+                .getResultList()
+                .stream()
+                .findFirst();
+        session.close();
+        return optionalOffer;
+    }
+
+    @Override
+    public List<Offer> findAllOfOneOrderOffers(int id) throws NullPointerException{
+        Session session = SessionFactorySingleton.getInstance().openSession();
+        Query<Offer> query = session.createQuery("FROM Offer o WHERE o.order.id = :id ", Offer.class);
+        query.setParameter("id", id);
+        List<Offer> offers = query.list();
+        session.close();
+        return offers;
+    }
+
+    @Override
+    public List<Offer> findAllExpertOffers(int id) throws NullPointerException {
+        Session session = SessionFactorySingleton.getInstance().openSession();
+        Query<Offer> query = session.createQuery("FROM Offer o WHERE o.expert.id = :id ", Offer.class);
         query.setParameter("id", id);
         List<Offer> offers = query.list();
         session.close();
